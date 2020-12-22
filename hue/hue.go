@@ -50,7 +50,7 @@ func (exporter *Exporter) Collect(metrics []*metric.Metric) (err error) {
 
 	err = bridge.Login(exporter.Username)
 	if err != nil {
-		return fmt.Errorf("[error login] '%v'", err)
+		return fmt.Errorf("[error Login()] '%v'", err)
 	}
 
 	for _, metric := range metrics {
@@ -121,7 +121,7 @@ func collectLights(bridge *hue.Bridge, metric *metric.Metric) (err error) {
 func newBridge(ipAddr string) *hue.Bridge {
 	bridge, err := hue.NewBridge(ipAddr)
 	if err != nil {
-		log.Fatalf("Error connecting to Hue bridge at '%v': '%v'\n", ipAddr, err)
+		log.Fatalf("Error connecting to Hue bridge with '%v': '%v'\n", ipAddr, err)
 	}
 	return bridge
 }

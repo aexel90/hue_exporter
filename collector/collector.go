@@ -132,7 +132,7 @@ func (collector *Collector) initDescAndType() {
 
 		switch metric.HueType {
 		case hue.TypeLight:
-			metric.FqName = "hue_light_status"
+			metric.FqName = "hue_light"
 			help = "status of lights registered at hue bridge"
 			metric.PromType = prometheus.GaugeValue
 		}

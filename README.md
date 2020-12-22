@@ -1,4 +1,4 @@
-# Philips Hue statistics exporter for prometheus
+# Philips Hue exporter for prometheus
 
 This exporter exports some variables from Philips Hue Bridge 
 (https://www.philips-hue.com)
