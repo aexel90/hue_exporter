@@ -134,8 +134,11 @@ func (collector *Collector) initDescAndType() {
 		case hue.TypeLight:
 			metric.FqName = "hue_light"
 			help = "status of lights registered at hue bridge"
-			metric.PromType = prometheus.GaugeValue
+		case hue.TypeSesnor:
+			metric.FqName = "hue_sensor"
+			help = "status of sensors registered at hue bridge"
 		}
+		metric.PromType = prometheus.GaugeValue
 
 		labels := []string{}
 		for _, label := range metric.Labels {

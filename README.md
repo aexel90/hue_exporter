@@ -39,6 +39,11 @@ Usage:
     hue_light_status{manufacturer_name="...",model_id="...",name="...",state_alert="...",state_bri="...",state_ct="...",state_on="...",state_reachable="...",state_saturation="...",sw_version="...",type="...",unique_id="..."} 1
     hue_light_status{manufacturer_name="...",model_id="...",name="...",state_alert="...",state_bri="...",state_ct="...",state_on="...",state_reachable="...",state_saturation="...",sw_version="...",type="...",unique_id="..."} 0
     ...
+    # HELP hue_sensor status of sensors registered at hue bridge
+    # TYPE hue_sensor gauge
+    hue_sensor{config_battery="...",config_on="...",config_reachable="...",manufacturer_name="...",model_id="...",name="...",state_button_event="...",state_daylight="...",state_last_updated="...",state_last_updated_time="...",sw_version="...",type="...",unique_id="..."} 1
+    hue_sensor{config_battery="...",config_on="...",config_reachable="...",manufacturer_name="...",model_id="...",name="...",state_button_event="...",state_daylight="...",state_last_updated="...",state_last_updated_time="...",sw_version="...",type="...",unique_id="..."} 0
+    ...
 
 ### Test exporter:
 
