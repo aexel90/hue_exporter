@@ -1,11 +1,12 @@
 package hue
 
 import (
+	"encoding/json"
 	"fmt"
-	"log"
+	"io/ioutil"
 
 	"github.com/aexel90/hue_exporter/metric"
-	hue "github.com/shamx9ir/gohue" // github.com/collinux/gohue
+	hueAPI "github.com/amimof/huego"
 )
 
 // Exporter data
@@ -14,31 +15,40 @@ type Exporter struct {
 	Username string
 }
 
+type collectEntry struct {
+	Type   string                 `json:"type"`
+	Result map[string]interface{} `json:"result"`
+}
+
 const (
 	TypeLight  = "light"
 	TypeSensor = "sensor"
 
-	LabelName                 = "Name"
-	LabelType                 = "Type"
-	LabelIndex                = "Index"
-	LabelModelID              = "Model_ID"
-	LabelManufacturerName     = "Manufacturer_Name"
-	LabelSWVersion            = "SW_Version"
-	LabelUniqueID             = "Unique_ID"
-	LabelStateOn              = "State_On"
-	LabelStateAlert           = "State_Alert"
-	LabelStateBri             = "State_Bri"
-	LabelStateCT              = "State_CT"
-	LabelStateReachable       = "State_Reachable"
-	LabelStateSaturation      = "State_Saturation"
-	LabelStateButtonEvent     = "State_Button_Event"
-	LabelStateDaylight        = "State_Daylight"
-	LabelStateLastUpdated     = "State_Last_Updated"
-	LabelStateLastUpdatedTime = "State_Last_Updated_Time"
-	LabelStateTemperature     = "State_Temperature"
-	LabelConfigBattery        = "Config_Battery"
-	LabelConfigOn             = "Config_On"
-	LabelConfigReachable      = "Config_Reachable"
+	LabelName             = "name"
+	LabelType             = "type"
+	LabelID               = "id"
+	LabelModelID          = "model_id"
+	LabelManufacturerName = "manufacturer_name"
+	LabelSwVersion        = "sw_version"
+	LabelSwConfigID       = "sw_config_id"
+	LabelUniqueID         = "unique_id"
+
+	LabelStateOn          = "state_on"
+	LabelStateAlert       = "state_alert"
+	LabelStateBri         = "state_bri"
+	LabelStateColorMode   = "state_color_mode"
+	LabelStateCT          = "state_ct"
+	LabelStateReachable   = "state_reachable"
+	LabelStateSaturation  = "state_saturation"
+	LabelStateButtonEvent = "state_buttonevent"
+	LabelStateDaylight    = "state_daylight"
+	LabelStateLastUpdated = "state_lastupdated"
+	LabelStateTemperature = "state_temperature"
+	LabelStateLightLevel  = "state_lightlevel"
+
+	LabelConfigBattery   = "config_battery"
+	LabelConfigOn        = "config_on"
+	LabelConfigReachable = "config_reachable"
 )
 
 // InitMetrics func
@@ -48,14 +58,31 @@ func (exporter *Exporter) InitMetrics() (metrics []*metric.Metric) {
 		HueType: TypeLight,
 		FqName:  "hue_light_info",
 		Help:    "Non-numeric data, value is always 1",
-		Labels:  []string{LabelName, LabelIndex, LabelType, LabelModelID, LabelManufacturerName, LabelSWVersion, LabelUniqueID, LabelStateOn, LabelStateAlert, LabelStateBri, LabelStateCT, LabelStateReachable, LabelStateSaturation},
+		Labels: []string{
+			LabelName,
+			LabelID,
+			LabelType,
+			LabelModelID,
+			LabelManufacturerName,
+			LabelSwVersion,
+			LabelSwConfigID,
+			LabelUniqueID,
+			LabelStateOn,
+			LabelStateAlert,
+			LabelStateBri,
+			LabelStateCT,
+			LabelStateReachable,
+			LabelStateSaturation,
+		},
 	})
 
 	metrics = append(metrics, &metric.Metric{
-		HueType:   TypeLight,
-		FqName:    "hue_light_state",
-		Help:      "light status (1=ON, 0=OFF)",
-		Labels:    []string{LabelName, LabelIndex, LabelType, LabelModelID, LabelManufacturerName, LabelSWVersion, LabelUniqueID, LabelStateOn},
+		HueType: TypeLight,
+		FqName:  "hue_light_state",
+		Help:    "light status (1=ON, 0=OFF)",
+		Labels: []string{
+			LabelName,
+		},
 		ResultKey: LabelStateOn,
 	})
 
@@ -63,37 +90,98 @@ func (exporter *Exporter) InitMetrics() (metrics []*metric.Metric) {
 		HueType: TypeSensor,
 		FqName:  "hue_sensor_info",
 		Help:    "Non-numeric data, value is always 1",
-		Labels:  []string{LabelName, LabelIndex, LabelType, LabelModelID, LabelManufacturerName, LabelSWVersion, LabelUniqueID, LabelStateButtonEvent, LabelStateDaylight, LabelStateLastUpdated, LabelStateLastUpdatedTime, LabelStateTemperature, LabelConfigBattery, LabelConfigOn, LabelConfigReachable},
+		Labels: []string{
+			LabelName,
+			LabelID,
+			LabelType,
+			LabelModelID,
+			LabelManufacturerName,
+			LabelSwVersion,
+			LabelUniqueID,
+			LabelStateButtonEvent,
+			LabelStateDaylight,
+			LabelStateLastUpdated,
+			LabelStateTemperature,
+			LabelConfigBattery,
+			LabelConfigOn,
+			LabelConfigReachable,
+		},
 	})
 
 	metrics = append(metrics, &metric.Metric{
-		HueType:   TypeSensor,
-		FqName:    "hue_sensor_battery",
-		Help:      "battery level percentage",
-		Labels:    []string{LabelName, LabelIndex, LabelType, LabelModelID, LabelManufacturerName, LabelSWVersion, LabelUniqueID},
-		ResultKey: LabelConfigBattery,
-	})
-
-	metrics = append(metrics, &metric.Metric{
-		HueType:   TypeSensor,
-		FqName:    "hue_sensor_temperature",
-		Help:      "temperature level celsius degree",
-		Labels:    []string{LabelName, LabelIndex, LabelType, LabelModelID, LabelManufacturerName, LabelSWVersion, LabelUniqueID},
+		HueType: TypeSensor,
+		FqName:  "hue_sensor_temperature",
+		Help:    "temperature level celsius degree",
+		Labels: []string{
+			LabelName,
+		},
 		ResultKey: LabelStateTemperature,
+	})
+
+	metrics = append(metrics, &metric.Metric{
+		HueType: TypeSensor,
+		FqName:  "hue_sensor_lightlevel",
+		Help:    "light level",
+		Labels: []string{
+			LabelName,
+		},
+		ResultKey: LabelStateLightLevel,
 	})
 
 	return metrics
 }
 
+// CollectAll available hue metrics
+func CollectAll(url string, username string, fileName string) {
+
+	bridge := hueAPI.New(url, username)
+
+	jsonContent := []collectEntry{}
+
+	sensorData, err := collectSensors(bridge)
+	if err != nil {
+		fmt.Sprintln(err)
+		return
+	}
+
+	lightData, err := collectLights(bridge)
+	if err != nil {
+		fmt.Sprintln(err)
+		return
+	}
+
+	for _, sensor := range sensorData {
+		jsonContent = append(jsonContent, collectEntry{
+			Type:   "sensor",
+			Result: sensor,
+		})
+	}
+	for _, light := range lightData {
+		jsonContent = append(jsonContent, collectEntry{
+			Type:   "light",
+			Result: light,
+		})
+	}
+
+	jsonString, err := json.MarshalIndent(jsonContent, "", "\t")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Println(string(jsonString))
+	if fileName != "" {
+		err = ioutil.WriteFile(fileName, jsonString, 0644)
+		if err != nil {
+			fmt.Printf("Failed writing JSON file '%s': %s\n", fileName, err.Error())
+		}
+	}
+}
+
 // Collect metrics
 func (exporter *Exporter) Collect(metrics []*metric.Metric) (err error) {
 
-	bridge := newBridge(exporter.BaseURL)
-
-	err = bridge.Login(exporter.Username)
-	if err != nil {
-		return fmt.Errorf("[error Login()] '%v'", err)
-	}
+	bridge := hueAPI.New(exporter.BaseURL, exporter.Username)
 
 	sensorData, err := collectSensors(bridge)
 	if err != nil {
@@ -117,31 +205,30 @@ func (exporter *Exporter) Collect(metrics []*metric.Metric) (err error) {
 	return nil
 }
 
-func collectSensors(bridge *hue.Bridge) (sensorData []map[string]interface{}, err error) {
+func collectSensors(bridge *hueAPI.Bridge) (sensorData []map[string]interface{}, err error) {
 
-	sensors, err := bridge.GetAllSensors()
+	sensors, err := bridge.GetSensors()
 	if err != nil {
 		return nil, fmt.Errorf("[error GetAllSensors()] '%v'", err)
 	}
 	for _, sensor := range sensors {
 		result := make(map[string]interface{})
 		result[LabelName] = sensor.Name
-		result[LabelIndex] = sensor.Index
+		result[LabelID] = sensor.ID
 		result[LabelType] = sensor.Type
 		result[LabelModelID] = sensor.ModelID
 		result[LabelManufacturerName] = sensor.ManufacturerName
-		result[LabelSWVersion] = sensor.SWVersion
+		result[LabelSwVersion] = sensor.SwVersion
 		result[LabelUniqueID] = sensor.UniqueID
-		result[LabelStateButtonEvent] = float64(sensor.State.ButtonEvent)
-		result[LabelStateDaylight] = sensor.State.Daylight
-		result[LabelStateLastUpdated] = sensor.State.LastUpdated
-		result[LabelStateLastUpdatedTime] = sensor.State.LastUpdated.Time
-		result[LabelConfigBattery] = sensor.Config.Battery
-		result[LabelConfigOn] = sensor.Config.On
-		result[LabelConfigReachable] = sensor.Config.Reachable
 
-		if sensor.Type == "ZLLTemperature" {
-			result[LabelStateTemperature] = float64(sensor.State.Temperature)
+		//State
+		for stateKey, stateValue := range sensor.State {
+			result["state_"+stateKey] = stateValue
+		}
+
+		//Config
+		for stateKey, stateValue := range sensor.Config {
+			result["config_"+stateKey] = stateValue
 		}
 
 		sensorData = append(sensorData, result)
@@ -149,9 +236,9 @@ func collectSensors(bridge *hue.Bridge) (sensorData []map[string]interface{}, er
 	return sensorData, nil
 }
 
-func collectLights(bridge *hue.Bridge) (lightData []map[string]interface{}, err error) {
+func collectLights(bridge *hueAPI.Bridge) (lightData []map[string]interface{}, err error) {
 
-	lights, err := bridge.GetAllLights()
+	lights, err := bridge.GetLights()
 	if err != nil {
 		return nil, fmt.Errorf("[error GetAllLights()] '%v'", err)
 	}
@@ -160,28 +247,24 @@ func collectLights(bridge *hue.Bridge) (lightData []map[string]interface{}, err 
 
 		result := make(map[string]interface{})
 		result[LabelName] = light.Name
-		result[LabelIndex] = light.Index
+		result[LabelID] = light.ID
 		result[LabelType] = light.Type
 		result[LabelModelID] = light.ModelID
 		result[LabelManufacturerName] = light.ManufacturerName
-		result[LabelSWVersion] = light.SWVersion
+		result[LabelSwVersion] = light.SwVersion
+		result[LabelSwConfigID] = light.SwConfigID
 		result[LabelUniqueID] = light.UniqueID
+
+		// State
 		result[LabelStateOn] = light.State.On
 		result[LabelStateAlert] = light.State.Alert
 		result[LabelStateBri] = light.State.Bri
-		result[LabelStateCT] = light.State.CT
+		result[LabelStateColorMode] = light.State.ColorMode
+		result[LabelStateCT] = light.State.Ct
 		result[LabelStateReachable] = light.State.Reachable
-		result[LabelStateSaturation] = light.State.Saturation
+		result[LabelStateSaturation] = light.State.Sat
 
 		lightData = append(lightData, result)
 	}
 	return lightData, nil
-}
-
-func newBridge(ipAddr string) *hue.Bridge {
-	bridge, err := hue.NewBridge(ipAddr)
-	if err != nil {
-		log.Fatalf("Error connecting to Hue bridge with '%v': '%v'\n", ipAddr, err)
-	}
-	return bridge
 }
