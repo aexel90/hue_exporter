@@ -126,8 +126,8 @@ func collectSensors(bridge *hue.Bridge) (sensorData []map[string]interface{}, er
 		result[LabelUniqueID] = sensor.UniqueID
 		result[LabelStateButtonEvent] = float64(sensor.State.ButtonEvent)
 		result[LabelStateDaylight] = sensor.State.Daylight
-		result[LabelStateLastUpdated] = sensor.State.LastUpdated.Unix()
-		result[LabelStateLastUpdatedTime] = sensor.State.LastUpdated.Time.Unix()
+		result[LabelStateLastUpdated] = sensor.State.LastUpdated
+		result[LabelStateLastUpdatedTime] = sensor.State.LastUpdated.Time
 		result[LabelConfigBattery] = sensor.Config.Battery
 		result[LabelConfigOn] = sensor.Config.On
 		result[LabelConfigReachable] = sensor.Config.Reachable
