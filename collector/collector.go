@@ -182,6 +182,11 @@ func getLabelValues(labelNames []string, result map[string]interface{}) ([]strin
 	labelValues := []string{}
 	for _, labelname := range labelNames {
 		labelValue := fmt.Sprintf("%v", result[labelname])
+		if labelValue == "true" {
+			labelValue = "1"
+		} else if labelValue == "false" {
+			labelValue = "0"
+		}
 		if labelname != "Name" {
 			labelValue = strings.ToLower(labelValue)
 		}
