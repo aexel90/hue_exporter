@@ -20,6 +20,7 @@ const (
 
 	LabelName                 = "Name"
 	LabelType                 = "Type"
+	LabelIndex                = "Index"
 	LabelModelID              = "Model_ID"
 	LabelManufacturerName     = "Manufacturer_Name"
 	LabelSWVersion            = "SW_Version"
@@ -47,21 +48,21 @@ func (exporter *Exporter) InitMetrics() (metrics []*metric.Metric) {
 		HueType: TypeLight,
 		FqName:  "hue_light_info",
 		Help:    "Non-numeric data, value is always 1",
-		Labels:  []string{LabelName, LabelType, LabelModelID, LabelManufacturerName, LabelSWVersion, LabelUniqueID, LabelStateOn, LabelStateAlert, LabelStateBri, LabelStateCT, LabelStateReachable, LabelStateSaturation},
+		Labels:  []string{LabelName, LabelIndex, LabelType, LabelModelID, LabelManufacturerName, LabelSWVersion, LabelUniqueID, LabelStateOn, LabelStateAlert, LabelStateBri, LabelStateCT, LabelStateReachable, LabelStateSaturation},
 	})
 
 	metrics = append(metrics, &metric.Metric{
 		HueType: TypeSensor,
 		FqName:  "hue_sensor_info",
 		Help:    "Non-numeric data, value is always 1",
-		Labels:  []string{LabelName, LabelType, LabelModelID, LabelManufacturerName, LabelSWVersion, LabelUniqueID, LabelStateButtonEvent, LabelStateDaylight, LabelStateLastUpdated, LabelStateLastUpdatedTime, LabelStateTemperature, LabelConfigBattery, LabelConfigOn, LabelConfigReachable},
+		Labels:  []string{LabelName, LabelIndex, LabelType, LabelModelID, LabelManufacturerName, LabelSWVersion, LabelUniqueID, LabelStateButtonEvent, LabelStateDaylight, LabelStateLastUpdated, LabelStateLastUpdatedTime, LabelStateTemperature, LabelConfigBattery, LabelConfigOn, LabelConfigReachable},
 	})
 
 	metrics = append(metrics, &metric.Metric{
 		HueType:   TypeSensor,
 		FqName:    "hue_sensor_battery",
 		Help:      "battery level percentage",
-		Labels:    []string{LabelName, LabelType, LabelModelID, LabelManufacturerName, LabelSWVersion, LabelUniqueID},
+		Labels:    []string{LabelName, LabelIndex, LabelType, LabelModelID, LabelManufacturerName, LabelSWVersion, LabelUniqueID},
 		ResultKey: LabelConfigBattery,
 	})
 
@@ -69,7 +70,7 @@ func (exporter *Exporter) InitMetrics() (metrics []*metric.Metric) {
 		HueType:   TypeSensor,
 		FqName:    "hue_sensor_temperature",
 		Help:      "temperature level celsius degree",
-		Labels:    []string{LabelName, LabelType, LabelModelID, LabelManufacturerName, LabelSWVersion, LabelUniqueID},
+		Labels:    []string{LabelName, LabelIndex, LabelType, LabelModelID, LabelManufacturerName, LabelSWVersion, LabelUniqueID},
 		ResultKey: LabelStateTemperature,
 	})
 
@@ -117,6 +118,7 @@ func collectSensors(bridge *hue.Bridge) (sensorData []map[string]interface{}, er
 	for _, sensor := range sensors {
 		result := make(map[string]interface{})
 		result[LabelName] = sensor.Name
+		result[LabelIndex] = sensor.Index
 		result[LabelType] = sensor.Type
 		result[LabelModelID] = sensor.ModelID
 		result[LabelManufacturerName] = sensor.ManufacturerName
@@ -150,6 +152,7 @@ func collectLights(bridge *hue.Bridge) (lightData []map[string]interface{}, err 
 
 		result := make(map[string]interface{})
 		result[LabelName] = light.Name
+		result[LabelIndex] = light.Index
 		result[LabelType] = light.Type
 		result[LabelModelID] = light.ModelID
 		result[LabelManufacturerName] = light.ManufacturerName
