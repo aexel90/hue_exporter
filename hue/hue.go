@@ -52,6 +52,14 @@ func (exporter *Exporter) InitMetrics() (metrics []*metric.Metric) {
 	})
 
 	metrics = append(metrics, &metric.Metric{
+		HueType:   TypeLight,
+		FqName:    "hue_light_state",
+		Help:      "light status (1=ON, 0=OFF)",
+		Labels:    []string{LabelName, LabelIndex, LabelType, LabelModelID, LabelManufacturerName, LabelSWVersion, LabelUniqueID, LabelStateOn},
+		ResultKey: LabelStateOn,
+	})
+
+	metrics = append(metrics, &metric.Metric{
 		HueType: TypeSensor,
 		FqName:  "hue_sensor_info",
 		Help:    "Non-numeric data, value is always 1",
