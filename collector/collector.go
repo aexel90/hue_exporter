@@ -116,8 +116,11 @@ func (collector *Collector) getResult() (err error) {
 			if err != nil {
 				return err
 			}
+			if resultValue == nil {
+				continue
+			}
 
-			result := metric.PrometheusResult{PromDesc: m.PromDesc, PromValueType: m.PromType, Value: resultValue, LabelValues: labelValues}
+			result := metric.PrometheusResult{PromDesc: m.PromDesc, PromValueType: m.PromType, Value: *resultValue, LabelValues: labelValues}
 			m.PromResult = append(m.PromResult, &result)
 		}
 	}
@@ -128,16 +131,6 @@ func (collector *Collector) initDescAndType() {
 
 	for _, metric := range collector.metrics {
 
-		var help string
-
-		switch metric.HueType {
-		case hue.TypeLight:
-			metric.FqName = "hue_light"
-			help = "status of lights registered at hue bridge"
-		case hue.TypeSesnor:
-			metric.FqName = "hue_sensor"
-			help = "status of sensors registered at hue bridge"
-		}
 		metric.PromType = prometheus.GaugeValue
 
 		labels := []string{}
@@ -145,19 +138,30 @@ func (collector *Collector) initDescAndType() {
 			labels = append(labels, strings.ToLower(label))
 		}
 
-		metric.PromDesc = prometheus.NewDesc(metric.FqName, help, labels, nil)
+		metric.PromDesc = prometheus.NewDesc(metric.FqName, metric.Help, labels, nil)
 	}
 }
 
-func getResultValue(resultKey string, result map[string]interface{}) (float64, error) {
+func getResultValue(resultKey string, result map[string]interface{}) (*float64, error) {
+
+	var floatValue float64
+
+	if resultKey == "" {
+		floatValue = 1
+		return &floatValue, nil
+	}
 
 	value := result[resultKey]
-	var floatValue float64
+	if value == nil {
+		return nil, nil
+	}
 
 	switch tval := value.(type) {
 	case float64:
 		floatValue = tval
 	case int:
+		floatValue = float64(tval)
+	case uint8:
 		floatValue = float64(tval)
 	case uint64:
 		floatValue = float64(tval)
@@ -168,9 +172,9 @@ func getResultValue(resultKey string, result map[string]interface{}) (float64, e
 			floatValue = 0
 		}
 	default:
-		return 0, fmt.Errorf("[getResultValue] %v in %v - unknown type: %T", resultKey, result, value)
+		return nil, fmt.Errorf("[getResultValue] %v in %v - unknown type: %T", resultKey, result, value)
 	}
-	return floatValue, nil
+	return &floatValue, nil
 }
 
 func getLabelValues(labelNames []string, result map[string]interface{}) ([]string, error) {

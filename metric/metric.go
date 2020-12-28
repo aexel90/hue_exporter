@@ -19,6 +19,7 @@ type Metric struct {
 	MetricResult []map[string]interface{}
 	ResultKey    string
 	FqName       string
+	Help         string
 
 	PromType   prometheus.ValueType
 	PromDesc   *prometheus.Desc
