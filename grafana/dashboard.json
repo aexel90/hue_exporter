@@ -106,7 +106,7 @@
       "pluginVersion": "7.3.6",
       "targets": [
         {
-          "expr": "hue_brdige_info",
+          "expr": "hue_bridge_info",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -165,7 +165,7 @@
       "pluginVersion": "7.3.6",
       "targets": [
         {
-          "expr": "hue_brdige_info",
+          "expr": "hue_bridge_info",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -224,7 +224,7 @@
       "pluginVersion": "7.3.6",
       "targets": [
         {
-          "expr": "hue_brdige_info",
+          "expr": "hue_bridge_info",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -283,7 +283,7 @@
       "pluginVersion": "7.3.6",
       "targets": [
         {
-          "expr": "hue_brdige_info",
+          "expr": "hue_bridge_info",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -343,7 +343,7 @@
       "pluginVersion": "7.3.6",
       "targets": [
         {
-          "expr": "hue_brdige_info",
+          "expr": "hue_bridge_info",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -402,7 +402,7 @@
       "pluginVersion": "7.3.6",
       "targets": [
         {
-          "expr": "hue_brdige_info",
+          "expr": "hue_bridge_info",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -462,7 +462,7 @@
       "pluginVersion": "7.3.6",
       "targets": [
         {
-          "expr": "hue_brdige_info",
+          "expr": "hue_bridge_info",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -1282,12 +1282,12 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Philips Hue",
   "uid": "X7uYULiRk",
-  "version": 10
+  "version": 12
 }
