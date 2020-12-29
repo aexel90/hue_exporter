@@ -23,6 +23,7 @@ type collectEntry struct {
 const (
 	typeLight  = "light"
 	typeSensor = "sensor"
+	typeBridge = "bridge"
 
 	labelName             = "name"
 	labelType             = "type"
@@ -127,12 +128,19 @@ func (exporter *Exporter) Collect(metrics []*metric.Metric) (err error) {
 		return err
 	}
 
+	bridgeData, err := collectBridgeInfo(bridge)
+	if err != nil {
+		return err
+	}
+
 	for _, metric := range metrics {
 		switch metric.HueType {
 		case typeLight:
 			metric.MetricResult = lightData
 		case typeSensor:
 			metric.MetricResult = sensorData
+		case typeBridge:
+			metric.MetricResult = bridgeData
 		default:
 			return fmt.Errorf("Type '%v' currently not supported", metric.HueType)
 		}

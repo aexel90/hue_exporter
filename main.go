@@ -20,7 +20,7 @@ var (
 	flagBridgeURL   = flag.String("hue-url", "", "The URL of the bridge")
 	flagUsername    = flag.String("username", "", "The username token having bridge access")
 	flagAddress     = flag.String("listen-address", "127.0.0.1:9773", "The address to listen on for HTTP requests.")
-	flagMetricsFile = flag.String("metrics-file", "metrics.json", "The JSON file with the metric definitions.")
+	flagMetricsFile = flag.String("metrics-file", "hue_metrics.json", "The JSON file with the metric definitions.")
 
 	flagTest        = flag.Bool("test", false, "test configured metrics")
 	flagCollect     = flag.Bool("collect", false, "test configured metrics")
