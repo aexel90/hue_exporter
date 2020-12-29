@@ -73,7 +73,7 @@
         },
         {
             "type": "bridge",
-            "fqname": "hue_brdige_info",
+            "fqname": "hue_bridge_info",
             "help": "Non-numeric data, value is always 1",
             "labels": [
                 "api_version",

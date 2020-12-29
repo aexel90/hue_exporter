@@ -19,20 +19,26 @@ Usage:
     $GOPATH/bin/hue_exporter -h
 
     Usage of ./hue_exporter:
+        -collect
+                Collect all available metrics
+        -collect-file string
+                The JSON file where to store collect results
         -hue-url string
-            The URL of the bridge
-        -listen-address string     
-            The address to listen on for HTTP requests. (default "127.0.0.1:9773")
+                The URL of the bridge
+        -listen-address string
+                The address to listen on for HTTP requests. (default "127.0.0.1:9773")
+        -metrics-file string
+                The JSON file with the metric definitions. (default "hue_metrics.json")
         -test
-            test configured metrics
+                Test configured metrics
         -username string
-            The username token having bridge access
+                The username token having bridge access
 
 ## Example execution
 
 ### Running within prometheus:
 
-    $GOPATH/bin/hue_exporter -hue_url 192.168.xxx.xxx -username ZlEH24zabK2jTpJ...
+    $GOPATH/bin/hue_exporter -hue_url 192.168.xxx.xxx -username ZlEH24zabK2jTpJ...  -metrics-file hue_metrics.json 
 
     # HELP hue_light_status status of lights registered at hue bridge
     # TYPE hue_light_status gauge
@@ -47,7 +53,14 @@ Usage:
 
 ### Test exporter:
 
-    $GOPATH/bin/hue_exporter -hue_url 192.168.xxx.xxx -username ZlEH24zabK2jTpJ... -test
+    $GOPATH/bin/hue_exporter -hue_url 192.168.xxx.xxx -username ZlEH24zabK2jTpJ... -test -metrics-file hue_metrics.json
+
+### Collect:
+
+    $GOPATH/bin/hue_exporter -hue_url 192.168.xxx.xxx -username ZlEH24zabK2jTpJ... -collect -metrics-file hue_metrics.json -collect-file result.json
 
 ## Grafana Dashboard
 
+Dashboard ID is 13645.
+
+![Grafana](https://raw.githubusercontent.com/aexel90/hue_exporter/main/grafana/screenshot.jpg)
