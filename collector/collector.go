@@ -17,20 +17,18 @@ type Collector struct {
 }
 
 // NewHueCollector initialization
-func NewHueCollector(URL string, username string) (*Collector, error) {
+func NewHueCollector(URL string, username string, metricsFile *metric.MetricsFile) (*Collector, error) {
 
 	hueExporter := hue.Exporter{
 		BaseURL:  URL,
 		Username: username,
 	}
 
-	return &Collector{&hueExporter, nil}, nil
+	return &Collector{&hueExporter, metricsFile.Metrics}, nil
 }
 
 // Describe for prometheus
 func (collector *Collector) Describe(ch chan<- *prometheus.Desc) {
-
-	collector.metrics = collector.exporter.InitMetrics()
 	collector.initDescAndType()
 }
 
@@ -52,7 +50,6 @@ func (collector *Collector) Collect(ch chan<- prometheus.Metric) {
 //Test collector metrics
 func (collector *Collector) Test() {
 
-	collector.metrics = collector.exporter.InitMetrics()
 	collector.initDescAndType()
 
 	err := collector.collect()
@@ -193,10 +190,6 @@ func getLabelValues(labelNames []string, result map[string]interface{}) ([]strin
 			labelValueString = "1"
 		case "false":
 			labelValueString = "0"
-		}
-
-		if labelname != "name" {
-			labelValue = strings.ToLower(labelValueString)
 		}
 		labelValues = append(labelValues, labelValueString)
 	}

@@ -14,14 +14,20 @@ type PrometheusResult struct {
 
 // Metric struct
 type Metric struct {
-	HueType      string
-	Labels       []string
+	HueType   string   `json:"type"`
+	ResultKey string   `json:"resultKey"`
+	FqName    string   `json:"fqName"`
+	Help      string   `json:"help"`
+	Labels    []string `json:"labels"`
+
 	MetricResult []map[string]interface{}
-	ResultKey    string
-	FqName       string
-	Help         string
 
 	PromType   prometheus.ValueType
 	PromDesc   *prometheus.Desc
 	PromResult []*PrometheusResult
+}
+
+// MetricsFile struct
+type MetricsFile struct {
+	Metrics []*Metric `json:"metrics"`
 }

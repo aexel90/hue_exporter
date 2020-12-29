@@ -1,0 +1,95 @@
+{
+    "metrics": [
+        {
+            "type": "light",
+            "fqname": "hue_light_info",
+            "help": "Non-numeric data, value is always 1",
+            "labels": [
+                "id",
+                "manufacturer_name",
+                "model_id",
+                "name",
+                "state_alert",
+                "state_bri",
+                "state_color_mode",
+                "state_ct",
+                "state_on",
+                "state_reachable",
+                "state_saturation",
+                "sw_config_id",
+                "sw_version",
+                "type",
+                "unique_id"
+            ]
+        },
+        {
+            "type": "light",
+            "fqname": "hue_light_state",
+            "help": "light status (1=ON, 0=OFF)",
+            "resultKey": "state_on",
+            "labels": [
+                "name"
+            ]
+        },
+        {
+            "type": "sesnsor",
+            "fqname": "hue_sensor_info",
+            "help": "Non-numeric data, value is always 1",
+            "labels": [
+                "config_battery",
+                "config_on",
+                "config_reachable",
+                "id",
+                "manufacturer_name",
+                "model_id",
+                "name",
+                "state_buttonevent",
+                "state_daylight",
+                "state_lastupdated",
+                "state_lightlevel",
+                "state_temperature",
+                "sw_version",
+                "type",
+                "unique_id"
+            ]
+        },
+        {
+            "type": "sensor",
+            "fqname": "hue_sensor_temperature",
+            "help": "temperature level celsius degree",
+            "resultKey": "state_temperature",
+            "labels": [
+                "name"
+            ]
+        },
+        {
+            "type": "sensor",
+            "fqname": "hue_sensor_lightlevel",
+            "help": "light level",
+            "resultKey": "state_lightlevel",
+            "labels": [
+                "name"
+            ]
+        },
+        {
+            "type": "bridge",
+            "fqname": "hue_brdige_info",
+            "help": "Non-numeric data, value is always 1",
+            "labels": [
+                "api_version",
+                "bridge_id",
+                "internetservice_internet",
+                "internetservice_remoteaccess",
+                "internetservice_swupdate",
+                "internetservice_time",
+                "ip_address",
+                "local_time",
+                "model_id",
+                "name",
+                "sw_update_last_change",
+                "sw_version",
+                "zigbee_channel"
+            ]
+        }
+    ]
+}
