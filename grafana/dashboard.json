@@ -55,7 +55,7 @@
     ]
   },
   "editable": true,
-  "gnetId": null,
+  "gnetId": 13645,
   "graphTooltip": 0,
   "id": null,
   "links": [],
@@ -293,7 +293,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Internet",
+      "title": "InternetAccess",
       "type": "stat"
     },
     {
@@ -353,7 +353,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Ziigbee Channel",
+      "title": "ZigBee Channel",
       "type": "stat"
     },
     {
@@ -1274,7 +1274,7 @@
       "type": "table"
     }
   ],
-  "refresh": "1m",
+  "refresh": "5m",
   "schemaVersion": 26,
   "style": "dark",
   "tags": [],
@@ -1289,5 +1289,5 @@
   "timezone": "",
   "title": "Philips Hue",
   "uid": "X7uYULiRk",
-  "version": 12
+  "version": 4
 }
