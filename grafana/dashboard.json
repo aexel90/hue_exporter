@@ -59,9 +59,10 @@
           "fields": "/^ip_address$/",
           "values": false
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.6",
+      "pluginVersion": "7.4.3",
       "targets": [
         {
           "expr": "hue_bridge_info",
@@ -118,9 +119,10 @@
           "fields": "/^model_id$/",
           "values": false
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.6",
+      "pluginVersion": "7.4.3",
       "targets": [
         {
           "expr": "hue_bridge_info",
@@ -177,9 +179,10 @@
           "fields": "/^internetservice_remoteaccess$/",
           "values": false
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.6",
+      "pluginVersion": "7.4.3",
       "targets": [
         {
           "expr": "hue_bridge_info",
@@ -236,9 +239,10 @@
           "fields": "/^internetservice_internet$/",
           "values": false
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.6",
+      "pluginVersion": "7.4.3",
       "targets": [
         {
           "expr": "hue_bridge_info",
@@ -296,9 +300,10 @@
           "fields": "/^zigbee_channel$/",
           "values": false
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.6",
+      "pluginVersion": "7.4.3",
       "targets": [
         {
           "expr": "hue_bridge_info",
@@ -355,9 +360,10 @@
           "fields": "/^api_version$/",
           "values": false
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.6",
+      "pluginVersion": "7.4.3",
       "targets": [
         {
           "expr": "hue_bridge_info",
@@ -415,9 +421,10 @@
           "fields": "/^sw_update_last_change$/",
           "values": false
         },
+        "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "7.3.6",
+      "pluginVersion": "7.4.3",
       "targets": [
         {
           "expr": "hue_bridge_info",
@@ -474,14 +481,16 @@
           "fields": "/^Value$/",
           "values": false
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.6",
+      "pluginVersion": "7.4.3",
       "targets": [
         {
           "expr": "sum(hue_light_state)",
-          "format": "time_series",
-          "instant": false,
+          "format": "table",
+          "hide": false,
+          "instant": true,
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -507,7 +516,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "rgb(110, 94, 27)",
+                "color": "yellow",
                 "value": null
               }
             ]
@@ -534,14 +543,15 @@
           "fields": "/^Value$/",
           "values": false
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.6",
+      "pluginVersion": "7.4.3",
       "targets": [
         {
           "expr": "count(hue_light_state)-sum(hue_light_state)",
-          "format": "time_series",
-          "instant": false,
+          "format": "table",
+          "instant": true,
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -601,7 +611,7 @@
         "alertThreshold": false
       },
       "percentage": false,
-      "pluginVersion": "7.3.6",
+      "pluginVersion": "7.4.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -710,7 +720,7 @@
         "alertThreshold": false
       },
       "percentage": false,
-      "pluginVersion": "7.3.6",
+      "pluginVersion": "7.4.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -924,7 +934,7 @@
           }
         ]
       },
-      "pluginVersion": "7.3.6",
+      "pluginVersion": "7.4.3",
       "targets": [
         {
           "expr": "hue_sensor_info{type=~\"ZLL.*\"}",
@@ -1169,12 +1179,12 @@
         "showHeader": true,
         "sortBy": [
           {
-            "desc": true,
-            "displayName": "State"
+            "desc": false,
+            "displayName": "Name"
           }
         ]
       },
-      "pluginVersion": "7.3.6",
+      "pluginVersion": "7.4.3",
       "targets": [
         {
           "expr": "hue_light_info",
@@ -1233,7 +1243,7 @@
     }
   ],
   "refresh": "5m",
-  "schemaVersion": 26,
+  "schemaVersion": 27,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1247,5 +1257,5 @@
   "timezone": "",
   "title": "Philips Hue",
   "uid": "X7uYULiRk",
-  "version": 4
+  "version": 6
 }
