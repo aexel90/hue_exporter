@@ -25,15 +25,12 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 13645,
   "graphTooltip": 0,
-  "id": 4,
+  "id": 2,
   "links": [],
   "liveNow": false,
   "panels": [
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "nLstfzWgz"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -75,9 +72,14 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "woSee8Zgk"
+          },
+          "editorMode": "code",
           "expr": "hue_bridge_info",
           "format": "table",
           "instant": true,
@@ -92,7 +94,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "nLstfzWgz"
+        "uid": "woSee8Zgk"
       },
       "fieldConfig": {
         "defaults": {
@@ -135,9 +137,13 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "woSee8Zgk"
+          },
           "expr": "hue_bridge_info",
           "format": "table",
           "instant": true,
@@ -150,10 +156,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "nLstfzWgz"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -195,9 +198,14 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "woSee8Zgk"
+          },
+          "editorMode": "code",
           "expr": "hue_bridge_info",
           "format": "table",
           "instant": true,
@@ -210,10 +218,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "nLstfzWgz"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -255,9 +260,14 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "woSee8Zgk"
+          },
+          "editorMode": "code",
           "expr": "hue_bridge_info",
           "format": "table",
           "instant": true,
@@ -270,10 +280,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "nLstfzWgz"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -316,9 +323,14 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "woSee8Zgk"
+          },
+          "editorMode": "code",
           "expr": "hue_bridge_info",
           "format": "table",
           "instant": true,
@@ -331,10 +343,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "nLstfzWgz"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -376,9 +385,14 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "woSee8Zgk"
+          },
+          "editorMode": "code",
           "expr": "hue_bridge_info",
           "format": "table",
           "instant": true,
@@ -391,10 +405,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "nLstfzWgz"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -437,9 +448,14 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "woSee8Zgk"
+          },
+          "editorMode": "code",
           "expr": "hue_bridge_info",
           "format": "table",
           "instant": true,
@@ -452,10 +468,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "nLstfzWgz"
-      },
+      "datasource": {},
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -497,9 +510,14 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "woSee8Zgk"
+          },
+          "editorMode": "code",
           "expr": "sum(hue_light_state)",
           "format": "table",
           "hide": false,
@@ -514,10 +532,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "nLstfzWgz"
-      },
+      "datasource": {},
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -559,9 +574,14 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "woSee8Zgk"
+          },
+          "editorMode": "code",
           "expr": "count(hue_light_state)-sum(hue_light_state)",
           "format": "table",
           "instant": true,
@@ -584,10 +604,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "nLstfzWgz"
-      },
+      "datasource": {},
       "decimals": 1,
       "fill": 0,
       "fillGradient": 4,
@@ -619,7 +636,7 @@
         "alertThreshold": false
       },
       "percentage": false,
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.2.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -629,9 +646,15 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "woSee8Zgk"
+          },
+          "editorMode": "code",
           "expr": "10^((hue_sensor_lightlevel-1)/10000)",
           "interval": "",
           "legendFormat": "{{name}}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -679,10 +702,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "nLstfzWgz"
-      },
+      "datasource": {},
       "decimals": 1,
       "fill": 0,
       "fillGradient": 4,
@@ -714,7 +734,7 @@
         "alertThreshold": false
       },
       "percentage": false,
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.2.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -724,9 +744,15 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "woSee8Zgk"
+          },
+          "editorMode": "code",
           "expr": "hue_sensor_temperature/100",
           "interval": "",
           "legendFormat": "{{name}}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -765,10 +791,7 @@
       }
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "nLstfzWgz"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -923,9 +946,14 @@
           }
         ]
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "woSee8Zgk"
+          },
+          "editorMode": "code",
           "expr": "hue_sensor_info{type=~\"ZLL.*\"}",
           "format": "table",
           "instant": true,
@@ -976,10 +1004,8 @@
       "type": "table"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "nLstfzWgz"
-      },
+      "datasource": {},
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1172,9 +1198,14 @@
           }
         ]
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "9.2.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "woSee8Zgk"
+          },
+          "editorMode": "code",
           "expr": "hue_light_info",
           "format": "table",
           "instant": true,
@@ -1229,20 +1260,20 @@
     }
   ],
   "refresh": "5m",
-  "schemaVersion": 36,
+  "schemaVersion": 37,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Philips Hue",
   "uid": "X7uYULiRk",
-  "version": 6,
+  "version": 5,
   "weekStart": ""
 }
