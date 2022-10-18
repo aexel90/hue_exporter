@@ -4,13 +4,13 @@ This exporter exports some variables from Philips Hue Bridge
 (https://www.philips-hue.com)
 to prometheus.
 
-## Building
+## Build
 
     go get github.com/aexel90/hue_exporter/
     cd $GOPATH/src/github.com/aexel90/hue_exporter
     go install
 
-## Running
+## Execute
 
 How to create a user for your bridge is described here: https://developers.meethue.com/develop/get-started-2/
 
@@ -33,6 +33,12 @@ Usage:
                 Test configured metrics
         -username string
                 The username token having bridge access
+
+## Docker
+
+        cp .env.template .env
+        vi .env
+        docker-compose up -d --build
 
 ## Example execution
 
