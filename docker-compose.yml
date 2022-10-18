@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  stravakomootsync:
+    image: hue_exporter
+    build:
+      context: .
+      dockerfile: ./Dockerfile.multistage
+    restart: unless-stopped
+    container_name: hue_exporter
+    ports:
+      - 9773:9773
+    env_file:
+      - .env
+    logging:
+        driver: "json-file"
+        options:
+            max-file: "3"
+            max-size: 10m
