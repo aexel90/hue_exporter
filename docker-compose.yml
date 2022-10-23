@@ -5,7 +5,7 @@ services:
     image: hue_exporter
     build:
       context: .
-      dockerfile: ./Dockerfile.multistage
+      dockerfile: ./Dockerfile
     restart: unless-stopped
     container_name: hue_exporter
     network_mode: "host" 
