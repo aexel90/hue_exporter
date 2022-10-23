@@ -82,4 +82,6 @@ Usage:
 
 Dashboard ID is 13645.
 
+https://grafana.com/grafana/dashboards/13645
+
 ![Grafana](https://raw.githubusercontent.com/aexel90/hue_exporter/main/grafana/screenshot.jpg)
