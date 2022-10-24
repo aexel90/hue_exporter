@@ -1,4 +1,47 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "9.2.1"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph (old)",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -25,12 +68,15 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 13645,
   "graphTooltip": 0,
-  "id": 2,
+  "id": null,
   "links": [],
   "liveNow": false,
   "panels": [
     {
-      "datasource": {},
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -77,7 +123,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "woSee8Zgk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "hue_bridge_info",
@@ -94,7 +140,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "woSee8Zgk"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -142,7 +188,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "woSee8Zgk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "expr": "hue_bridge_info",
           "format": "table",
@@ -156,7 +202,10 @@
       "type": "stat"
     },
     {
-      "datasource": {},
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -203,7 +252,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "woSee8Zgk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "hue_bridge_info",
@@ -218,7 +267,10 @@
       "type": "stat"
     },
     {
-      "datasource": {},
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -265,7 +317,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "woSee8Zgk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "hue_bridge_info",
@@ -280,7 +332,10 @@
       "type": "stat"
     },
     {
-      "datasource": {},
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -328,7 +383,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "woSee8Zgk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "hue_bridge_info",
@@ -343,7 +398,10 @@
       "type": "stat"
     },
     {
-      "datasource": {},
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -390,7 +448,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "woSee8Zgk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "hue_bridge_info",
@@ -405,7 +463,10 @@
       "type": "stat"
     },
     {
-      "datasource": {},
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -453,7 +514,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "woSee8Zgk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "hue_bridge_info",
@@ -468,7 +529,10 @@
       "type": "stat"
     },
     {
-      "datasource": {},
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -515,7 +579,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "woSee8Zgk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum(hue_light_state)",
@@ -532,7 +596,10 @@
       "type": "stat"
     },
     {
-      "datasource": {},
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -579,7 +646,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "woSee8Zgk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "count(hue_light_state)-sum(hue_light_state)",
@@ -604,7 +671,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": {},
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "decimals": 1,
       "fill": 0,
       "fillGradient": 4,
@@ -648,7 +718,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "woSee8Zgk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "10^((hue_sensor_lightlevel-1)/10000)",
@@ -702,7 +772,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": {},
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "decimals": 1,
       "fill": 0,
       "fillGradient": 4,
@@ -746,7 +819,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "woSee8Zgk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "hue_sensor_temperature/100",
@@ -791,7 +864,10 @@
       }
     },
     {
-      "datasource": {},
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -951,7 +1027,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "woSee8Zgk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "hue_sensor_info{type=~\"ZLL.*\"}",
@@ -1004,7 +1080,10 @@
       "type": "table"
     },
     {
-      "datasource": {},
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1203,7 +1282,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "woSee8Zgk"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "hue_light_info",
@@ -1274,6 +1353,6 @@
   "timezone": "",
   "title": "Philips Hue",
   "uid": "X7uYULiRk",
-  "version": 5,
+  "version": 1,
   "weekStart": ""
 }
