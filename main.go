@@ -21,11 +21,30 @@ var (
 	flagUsername    = flag.String("username", "", "The username token having bridge access")
 	flagAddress     = flag.String("listen-address", "127.0.0.1:9773", "The address to listen on for HTTP requests.")
 	flagMetricsFile = flag.String("metrics-file", "hue_metrics.json", "The JSON file with the metric definitions.")
+	authUser        = flag.String("auth.user", "", "Username for basic auth.")
+	authPass        = flag.String("auth.pass", "", "Password for basic auth. Enables basic auth if set.")
 
 	flagTest        = flag.Bool("test", false, "Test configured metrics")
 	flagCollect     = flag.Bool("collect", false, "Collect all available metrics")
 	flagCollectFile = flag.String("collect-file", "", "The JSON file where to store collect results")
 )
+
+type basicAuthHandler struct {
+	handler  http.HandlerFunc
+	user     string
+	password string
+}
+
+func (h *basicAuthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	user, password, ok := r.BasicAuth()
+	if !ok || password != h.password || user != h.user {
+		w.Header().Set("WWW-Authenticate", "Basic realm=\"metrics\"")
+		http.Error(w, "Invalid username or password", http.StatusUnauthorized)
+		return
+	}
+	h.handler(w, r)
+	return
+}
 
 func main() {
 
@@ -55,7 +74,18 @@ func main() {
 		hueCollector.Test()
 	} else {
 		prometheus.MustRegister(hueCollector)
-		http.Handle("/metrics", promhttp.Handler())
+		handler := promhttp.Handler()
+		if *authUser != "" || *authPass != "" {
+			if *authUser == "" || *authPass == "" {
+				log.Fatal("You need to specify -auth.user and -auth.pass to enable basic auth")
+			}
+			handler = &basicAuthHandler{
+			        handler:  promhttp.Handler().ServeHTTP,
+			        user:     *authUser,
+			        password: *authPass,
+		        }
+	        }
+		http.Handle("/metrics", handler)
 		fmt.Printf("metrics available at http://%s/metrics\n", *flagAddress)
 		log.Fatal(http.ListenAndServe(*flagAddress, nil))
 	}
