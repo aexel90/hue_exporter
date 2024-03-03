@@ -19,19 +19,27 @@ jobs:
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      - name: Log in to the container registry
+      - name: Log in to the Github container registry
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/vremenar/rpi-setup/hue_exporter:latest
+          tags: | 
+            ghcr.io/vremenar/hue_exporter/hue_exporter:latest
+            ghcr.io/vremenar/rpi-setup/hue_exporter:latest
+            vremenar/hue_exporter:latest
       #- name: Build multi-arch Docker image
       #  run: docker buildx build --platform "linux/amd64,linux/arm64" -t "ghcr.io/vremenar/hue_exporter/hue_exporter:latest" -t "ghcr.io/vremenar/rpi-setup/hue_exporter:latest" --push "."
 #
