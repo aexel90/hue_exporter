@@ -28,4 +28,4 @@ jobs:
       - name: Build arm64 Docker image
         run: docker buildx build --platform linux/arm64 -t ghcr.io/vremenar/hue_exporter/hue_exporter:latest-arm64 --push .
       - name: Build multi-arch Docker image
-        run: docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/vremenar/hue_exporter/hue_exporter:latest -t ghcr.io/vremenar/rpi-setup/hue_exporter:latest --push .
+        run: docker buildx build --platform "linux/amd64,linux/arm64" -t "ghcr.io/vremenar/hue_exporter/hue_exporter:latest" -t "ghcr.io/vremenar/rpi-setup/hue_exporter:latest" --push "."
