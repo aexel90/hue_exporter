@@ -38,7 +38,6 @@ jobs:
           push: true
           tags: | 
             ghcr.io/vremenar/hue_exporter/hue_exporter:latest
-            ghcr.io/vremenar/rpi-setup/hue_exporter:latest
             vremenar/hue_exporter:latest
       #- name: Build multi-arch Docker image
       #  run: docker buildx build --platform "linux/amd64,linux/arm64" -t "ghcr.io/vremenar/hue_exporter/hue_exporter:latest" -t "ghcr.io/vremenar/rpi-setup/hue_exporter:latest" --push "."
