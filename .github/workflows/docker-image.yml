@@ -30,6 +30,9 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
@@ -38,7 +41,9 @@ jobs:
           push: true
           tags: | 
             ghcr.io/vremenar/hue_exporter:latest
+            ghcr.io/vremenar/hue_exporter:${{ steps.date.outputs.date }}
             vremenar/hue_exporter:latest
+            vremenar/hue_exporter:${{ steps.date.outputs.date }}
       #- name: Build multi-arch Docker image
       #  run: docker buildx build --platform "linux/amd64,linux/arm64" -t "ghcr.io/vremenar/hue_exporter/hue_exporter:latest" -t "ghcr.io/vremenar/rpi-setup/hue_exporter:latest" --push "."
 #
