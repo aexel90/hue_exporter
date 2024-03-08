@@ -1,11 +1,11 @@
 module github.com/aexel90/hue_exporter
 
-go 1.17
+go 1.22
 
 require (
 	github.com/amimof/huego v1.2.0
 	github.com/namsral/flag v1.7.4-pre
-	github.com/prometheus/client_golang v1.11.0
+	github.com/prometheus/client_golang v1.11.1
 )
 
 require (
