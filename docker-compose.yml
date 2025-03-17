@@ -1,20 +1,10 @@
-version: '3.4'
-
 services:
   hue_exporter:
-    image: hue_exporter
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    restart: unless-stopped
+    image: ghcr.io/aexel90/hue_exporter:latest
     container_name: hue_exporter
+    restart: on-failure:2
     network_mode: "host" 
     ports:
       - 9773:9773
     env_file:
       - .env
-    logging:
-        driver: "json-file"
-        options:
-            max-file: "3"
-            max-size: 10m
