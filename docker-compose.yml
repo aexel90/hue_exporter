@@ -1,10 +1,14 @@
 services:
   hue_exporter:
-    image: ghcr.io/aexel90/hue_exporter:latest
-    container_name: hue_exporter
+    image: hue_exporter
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     restart: on-failure:2
-    network_mode: "host" 
+    container_name: hue_exporter
     ports:
       - 9773:9773
+    volumes:
+      - ./hue_metrics.json:/hue_metrics.json
     env_file:
       - .env
